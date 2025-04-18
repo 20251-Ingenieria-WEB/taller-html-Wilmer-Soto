@@ -10,30 +10,46 @@
 </head>
 
 <body>
-    <div class="container mt-5">
+    <div class="container mt-4">
         <h1 class="text-center mb-4">Busqueda de Pokemons</h1>
         <div class="row mb-3">
-            <div class="col-md-6 offset-md-3 p-4 border rounded bg-light">
+            <div class="col-md-4 offset-md-4 p-4 border rounded bg-light">
                 <label for="pokemonName" class="mb-2 fw-semibold">Ingresa un nombre de Pokemon a buscar:</label></br>
                 <input type="text" id="pokemonName" class="form-control "></br>
                 <button class="btn-primary btn" id="searchPokemonButton">Buscar Pokemon por nombre</button>
             </div>
         </div>
-    </div>
 
-    <div id="pokemonData"></div>
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img id="pokemonImage" class="img-fluid w-100" style="max-width: 100%;"
+                                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/132.png">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 id="pokemonNameDisplay" class="card-title">Ditto</h5>
+                                <p id="pokemonType" class="card-text">Tipo de Ditto</p>
+                                <p id="pokemonDescription" class="card-text">Descripcion de Ditto</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-    <script src="js/api.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+        <script src="js/api.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
