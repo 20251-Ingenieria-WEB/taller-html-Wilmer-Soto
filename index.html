@@ -11,17 +11,23 @@
 </head>
 
 <body>
-    <div class="container mt-4">
+    <div class="container mt-4 mb-5">
         <div class="row mb-3"> 
             <div class="col-12 bg-primary-subtle border rounded p-2">
-                <h1 class="text-center fw-semibold">Busqueda de Pokemon</h1>
+                <h1 class="text-center fw-semibold mb-3">Busqueda de Pokemon</h1>
+                <div>
+                    <a href="/pages/team_builder.html" class="btn btn-primary mb-2 offset-md-5">Ir a creador de equipo</a>
+                </div>
             </div>
+            
         </div>
+        
         <div class="row mb-3">
             <div class="col-md-4 offset-md-4 p-4 border rounded bg-secondary-subtle">
                 <label for="pokemonName" class="mb-2 fw-semibold">Ingresa un nombre de Pokemon a buscar:</label></br>
-                <input type="text" id="pokemonSearch" class="form-control "></br>
-                <button class="btn-primary btn" id="searchPokemonButton">Buscar Pokemon por nombre</button>
+                <input type="text" id="pokemonSearch" class="form-control"></br>
+                <button class="btn-primary btn mb-3" id="searchPokemonButton" type="submit">Buscar Pokemon por nombre</button>
+                <button class="btn-secondary btn" id="searchAleatoryButton">Pokemon Aleatorio</button>
             </div>
         </div>
 
@@ -59,6 +65,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
         <script src="js/api.js"></script>
 </body>

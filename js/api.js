@@ -1,4 +1,5 @@
 const searchPokemonButton = document.getElementById("searchPokemonButton");
+const searchAleatoryButton = document.getElementById("searchAleatoryButton");
 const errorMessage = document.getElementById("errorMessage");
 
 const pokemonName = document.getElementById("pokemonNameDisplay");
@@ -9,10 +10,17 @@ const pokemonTypeIconsDisplay = document.getElementById("pokemonTypeIconsDisplay
 const pokemonDescription = document.getElementById("pokemonDescriptionDisplay");
 const pokemonImage = document.getElementById("pokemonImageDisplay");
 
-searchPokemonButton.addEventListener("click", searchPokemon);
-
-function searchPokemon(){
+searchPokemonButton.addEventListener("click", () => {
     const pokemonSearch = document.getElementById("pokemonSearch").value.trim().toLowerCase();
+    searchPokemon(pokemonSearch);
+});
+searchAleatoryButton.addEventListener("click", () => {
+    const randomPokemonId = getRandomPokemonId();
+    console.log(randomPokemonId);
+    searchPokemon(randomPokemonId);
+});
+
+function searchPokemon(pokemonSearch){
     const pokeApiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonSearch}`;
 
     fetch(pokeApiUrl)
@@ -62,6 +70,17 @@ function searchPokemon(){
             pokemonImage.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/132.png";
         })
     }
+
+function getRandomPokemonId(){
+    // La PokeAPI se reparte entre pokemones estandar (1-1025) y los legendarios (10001-10277). Se divide la probabilidad entre ambos rangos de pokemones, siendo 0.787 la probabilidad de que el pokemon sea estandar y 0.213 la probabilidad de que sea legendario.
+    const standardPokemon = Math.random() < 0.787;
+
+    if (standardPokemon){
+        return Math.floor(Math.random() * 1025) + 1;
+    } else{
+        return Math.floor(Math.random() * 277) + 10001;
+    }
+}
 
 function searchPokemonDescription(pokeSpeciesUrl){
     fetch(pokeSpeciesUrl)
