@@ -1,4 +1,5 @@
 const searchPokemonButton = document.getElementById("searchPokemonButton");
+const errorMessage = document.getElementById("errorMessage");
 
 const pokemonName = document.getElementById("pokemonNameDisplay");
 const pokemonId = document.getElementById("pokemonIdDisplay");
@@ -26,6 +27,7 @@ function searchPokemon(){
             return response.json();
         })
         .then(data =>{
+            errorMessage.classList.add("d-none");
             pokemonTypeIconsDisplay.innerHTML = "";
             pokemonAbilitiesDisplay.innerHTML = "";
 
@@ -48,6 +50,16 @@ function searchPokemon(){
             data.types.forEach(element => {
                 searchPokemonTypeImages(element.type.url);
             });
+        }).catch(error =>{
+            errorMessage.classList.remove("d-none");
+            errorMessage.innerText = error.message;
+            pokemonName.innerText = "Nombre Pokemon";
+            pokemonId.innerText = "#000";
+            pokemonHeightWeightDisplay.innerText = "Altura: 0 m, Peso: 0 kg";
+            pokemonAbilitiesDisplay.innerHTML = "";
+            pokemonTypeIconsDisplay.innerHTML = "";
+            pokemonDescription.innerText = "Descripción Pokemon";
+            pokemonImage.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/132.png";
         })
     }
 
