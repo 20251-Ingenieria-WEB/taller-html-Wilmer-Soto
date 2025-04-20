@@ -16,7 +16,6 @@ searchPokemonButton.addEventListener("click", () => {
 });
 searchAleatoryButton.addEventListener("click", () => {
     const randomPokemonId = getRandomPokemonId();
-    console.log(randomPokemonId);
     searchPokemon(randomPokemonId);
 });
 
@@ -46,7 +45,6 @@ function searchPokemon(pokemonSearch){
             pokemonHeightWeightDisplay.innerText = `Altura: ${(data.height*0.1).toFixed(2)} m, Peso: ${(data.weight*0.1).toFixed(2)} kg`;
             
             data.moves.forEach(element => {
-                console.log(element.move.name);
                 const badge = document.createElement("span");
                 badge.className = "badge bg-secondary";
                 badge.innerText = element.move.name.charAt(0).toUpperCase() + element.move.name.slice(1);
@@ -95,7 +93,9 @@ function searchPokemonDescription(pokeSpeciesUrl){
             return response.json();
         })
         .then(data =>{
-            pokemonDescription.innerText = data.flavor_text_entries[6].flavor_text.replace(/[\n\f]/g, " ");
+            flavorText = data.flavor_text_entries.find(entry => entry.language.name === "en").flavor_text.replace(/[\n\f]/g, " ");
+            pokemonDescription.innerText = flavorText;
+            //pokemonDescription.innerText = data.flavor_text_entries[6].flavor_text.replace(/[\n\f]/g, " ");
         })
 }
 
@@ -113,7 +113,14 @@ function searchPokemonTypeImages(pokeTypeUrl){
     })
     .then(data =>{
         const img = document.createElement("img");
-        img.src = data.sprites["generation-iii"]["ruby-saphire"].name_icon;
+
+        for (const [key, value] of Object.entries(data.sprites)) {
+            const game = Object.values(value);
+            const lastGame = game[game.length - 1];
+            img.src = lastGame.name_icon;
+            break;
+        }
+
         img.style.width = "45px";
         img.style.height = "22px";
         pokemonTypeIconsDisplay.appendChild(img);
