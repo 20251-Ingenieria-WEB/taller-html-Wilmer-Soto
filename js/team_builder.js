@@ -1,7 +1,9 @@
 const searchPokemonButton = document.getElementById("searchPokemonButton");
+const deleteAllButton = document.getElementById("deleteAllButton");
 const teamPokemon = [];
 
 searchPokemonButton.addEventListener("click", () => {
+    console.log(teamPokemon)
     const pokemonSearch = document.getElementById("pokemonSearch").value.trim().toLowerCase();
     if (teamPokemon.length >= 6) {
         errorMessage.classList.remove("d-none");
@@ -17,13 +19,24 @@ searchPokemonButton.addEventListener("click", () => {
     searchPokemon(pokemonSearch);
 });
 
+deleteAllButton.addEventListener("click", () => {
+    teamPokemon.forEach(pokemonName => {
+        const card = document.getElementById(`card-${pokemonName}`);
+        if (card) {
+            card.remove();
+        }
+    });
+    teamPokemon.length = 0;
+});
+
 function createPokemonCard(pokemonData) {
     teamPokemon.push(pokemonData.name.toLowerCase());
     const cardCol = document.createElement("div");
-    cardCol.classList.add("col-md-4");
+    cardCol.id = `card-${pokemonData.name.toLowerCase()}`;
 
     // Se reutiliza el HTML de la tarjeta de Pokemon de la pagina principal. Se borra la parte de descripcion apenas. Las ids del html se definen de forma dinamica.
     const cardHTML = `
+    <div class="col-md-4">
         <div class="card h-100">
             <div class="row g-0">
                 <div class="col-md-4 d-flex align-items-center justify-content-center">
@@ -34,17 +47,19 @@ function createPokemonCard(pokemonData) {
                         <h5 class="card-title fw-semibold mb-1">${pokemonData.name}</h5>
                         <p class="card-text fw-light fst-italic mb-0">#${pokemonData.id}</p>
                         <p class="card-text fw-light fst-italic mb-1">Altura: ${pokemonData.height} m | Peso: ${pokemonData.weight} kg</p>
-                        <div id="typeIcons-${pokemonData.id}" class="d-flex gap-2 mb-2 align-items-center"></div>
+                        <div id="typeIcons-${pokemonData.name}" class="d-flex gap-2 mb-2 align-items-center"></div>
                         <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${pokemonData.id}">Ver habilidades</button>
                         <div id="collapse${pokemonData.id}" class="collapse">
                             <div class="d-flex flex-wrap gap-2">
                                 ${pokemonData.abilities.map(ability => `<span class="badge bg-info">${ability}</span>`).join('')}
                             </div>
                         </div>
+                        <button class="btn btn-danger" onclick="removePokemon('${pokemonData.name.toLowerCase()}')">Eliminar</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     `;
 
     cardCol.innerHTML = cardHTML;
@@ -91,7 +106,7 @@ function searchPokemonTypeImages(pokemonData) {
         fetch(typeUrl)
             .then(response => response.json())
             .then(data => {
-                const typeIconsId = document.getElementById(`typeIcons-${pokemonData.id}`);
+                const typeIconsId = document.getElementById(`typeIcons-${pokemonData.name}`);
                 const img = document.createElement("img");
 
                 for (const [key, value] of Object.entries(data.sprites)) {
@@ -107,3 +122,18 @@ function searchPokemonTypeImages(pokemonData) {
             .catch(error => console.error(`Error al obtener la imagen del tipo: ${error}`));
     });
 };
+
+function removePokemon(pokemonName) {
+    console.log("Borrando Pokemon: ", pokemonName);
+
+    const index = teamPokemon.findIndex(p => p.toLowerCase() === pokemonName.toLowerCase());
+
+    if (index !== -1) {
+        teamPokemon.splice(index, 1);
+    }
+    const card = document.getElementById(`card-${pokemonName.toLowerCase()}`);
+    if (card) {
+        card.remove();
+    }
+    
+}
