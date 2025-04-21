@@ -42,6 +42,7 @@ searchAleatoryButton.addEventListener("click", () => {
     searchPokemon(randomPokemonId);
 });
 
+// Funcion para crear la tarjeta de Pokemon. Se crea un div con la clase col-md-4 y se le asigna un id dinamico. Se crea el HTML de la tarjeta de Pokemon y se le asigna al div creado. Se agrega el div al contenedor teamDisplay que ya esta en el HTML.
 function createPokemonCard(pokemonData) {
     const cardCol = document.createElement("div");
     cardCol.classList.add("col-md-4");
@@ -80,6 +81,7 @@ function createPokemonCard(pokemonData) {
     document.getElementById("teamDisplay").appendChild(cardCol);
 }
 
+// Funcion para buscar un Pokemon por nombre o ID. Se crea un pokemonData para enviar a la funcion createPokemonCard y se le agrega el Pokemon al array teamPokemon. Se busca la imagen del tipo de Pokemon y se le agrega a la tarjeta de Pokemon.
 function searchPokemon(pokemonSearch){
     const pokeApiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonSearch}`;
 
@@ -115,6 +117,8 @@ function searchPokemon(pokemonSearch){
         });
 }
 
+// Funcion para buscar la imagen del tipo de Pokemon. Se usa el "name_icon" y se busca el primer icono que funcione iniciando desde el ultimo juego.
+// Copiado y pegado pero con el id cambiado para elegir el definido dinamicamente en la funcion createPokemonCard
 function searchPokemonTypeImages(pokemonData) {
     pokemonData.types.forEach(typeUrl => {
         fetch(typeUrl)

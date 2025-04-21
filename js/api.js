@@ -19,6 +19,7 @@ searchAleatoryButton.addEventListener("click", () => {
     searchPokemon(randomPokemonId);
 });
 
+//Funcion para buscar un Pokemon por su nombre o ID
 function searchPokemon(pokemonSearch){
     const pokeApiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonSearch}`;
 
@@ -34,6 +35,8 @@ function searchPokemon(pokemonSearch){
             return response.json();
         })
         .then(data =>{
+            // Se elimina el mensaje de error si existe
+            // Se definen inmediatamente los valores de Pokemon que se van a mostrar
             errorMessage.classList.add("d-none");
             pokemonTypeIconsDisplay.innerHTML = "";
             pokemonAbilitiesDisplay.innerHTML = "";
@@ -57,6 +60,7 @@ function searchPokemon(pokemonSearch){
                 searchPokemonTypeImages(element.type.url);
             });
         }).catch(error =>{
+            // En caso de error, se muestra un mensaje y los valores de Pokemon se reinician
             errorMessage.classList.remove("d-none");
             errorMessage.innerText = error.message;
             pokemonName.innerText = "Nombre Pokemon";
@@ -80,6 +84,7 @@ function getRandomPokemonId(){
     }
 }
 
+// Funcion para buscar la descripcion del Pokemon. Se usa el "flavor text" y se define en ingles.
 function searchPokemonDescription(pokeSpeciesUrl){
     fetch(pokeSpeciesUrl)
         .then(response =>{
@@ -95,10 +100,10 @@ function searchPokemonDescription(pokeSpeciesUrl){
         .then(data =>{
             flavorText = data.flavor_text_entries.find(entry => entry.language.name === "en").flavor_text.replace(/[\n\f]/g, " ");
             pokemonDescription.innerText = flavorText;
-            //pokemonDescription.innerText = data.flavor_text_entries[6].flavor_text.replace(/[\n\f]/g, " ");
         })
 }
 
+// Funcion para buscar la imagen del tipo de Pokemon. Se usa el "name_icon" y se busca el primer icono que funcione iniciando desde el ultimo juego.
 function searchPokemonTypeImages(pokeTypeUrl){
     fetch(pokeTypeUrl)
         .then(response =>{
