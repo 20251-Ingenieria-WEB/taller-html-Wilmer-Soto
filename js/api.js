@@ -113,15 +113,23 @@ function searchPokemonTypeImages(pokeTypeUrl){
     })
     .then(data =>{
         const img = document.createElement("img");
+        let iconFound = false;
 
         for (const [key, value] of Object.entries(data.sprites)) {
             const game = Object.values(value);
-            const lastGame = game[game.length - 1];
-            img.src = lastGame.name_icon;
-            img.style.width = "45px";
-            img.style.height = "22px";
-            break;
+
+            for (let i = game.length - 1; i >= 0; i--){
+                const currentGame = game[i];
+                if (currentGame.name_icon){
+                    img.src = currentGame.name_icon;
+                    img.style.width = "45px";
+                    img.style.height = "22px";
+                    pokemonTypeIconsDisplay.appendChild(img);
+                    iconFound = true;
+                    break;
+                }
+            }
+            if (iconFound) break;
         }
-        pokemonTypeIconsDisplay.appendChild(img);
     })
 }

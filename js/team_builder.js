@@ -1,6 +1,7 @@
 const searchPokemonButton = document.getElementById("searchPokemonButton");
 const deleteAllButton = document.getElementById("deleteAllButton");
 const createTeamButton = document.getElementById("createTeamButton");
+const searchAleatoryButton = document.getElementById("searchAleatoryButton");
 const teamPokemon = [];
 
 searchPokemonButton.addEventListener("click", () => {
@@ -36,6 +37,11 @@ createTeamButton.addEventListener("click", () => {
 
     teamNameDisplay.innerText = teamName ? `Equipo: ${teamName}` : "Equipo: Sin nombre";
 }); 
+
+searchAleatoryButton.addEventListener("click", () => {
+    const randomPokemonId = getRandomPokemonId();
+    searchPokemon(randomPokemonId);
+});
 
 function createPokemonCard(pokemonData) {
     teamPokemon.push(pokemonData.name.toLowerCase());
@@ -115,17 +121,25 @@ function searchPokemonTypeImages(pokemonData) {
         fetch(typeUrl)
             .then(response => response.json())
             .then(data => {
+                let iconFound = false;
                 const typeIconsId = document.getElementById(`typeIcons-${pokemonData.name}`);
                 const img = document.createElement("img");
 
                 for (const [key, value] of Object.entries(data.sprites)) {
                     const game = Object.values(value);
-                    const lastGame = game[game.length - 1];
-                    img.src = lastGame.name_icon;
-                    img.style.width = "45px";
-                    img.style.height = "22px";
-                    typeIconsId.appendChild(img);
-                    break;
+        
+                    for (let i = game.length - 1; i >= 0; i--){
+                        const currentGame = game[i];
+                        if (currentGame.name_icon){
+                            img.src = currentGame.name_icon;
+                            img.style.width = "45px";
+                            img.style.height = "22px";
+                            typeIconsId.appendChild(img);
+                            iconFound = true;
+                            break;
+                        }
+                    }
+                    if (iconFound) break;
                 }
             })
             .catch(error => console.error(`Error al obtener la imagen del tipo: ${error}`));
@@ -145,4 +159,16 @@ function removePokemon(pokemonName) {
         card.remove();
     }
     
+}
+
+//Copiado y pegado ya que por alguna razon no se puede importar desde api.js
+function getRandomPokemonId(){
+    // La PokeAPI se reparte entre pokemones estandar (1-1025) y los legendarios (10001-10277). Se divide la probabilidad entre ambos rangos de pokemones, siendo 0.787 la probabilidad de que el pokemon sea estandar y 0.213 la probabilidad de que sea legendario.
+    const standardPokemon = Math.random() < 0.787;
+
+    if (standardPokemon){
+        return Math.floor(Math.random() * 1025) + 1;
+    } else{
+        return Math.floor(Math.random() * 277) + 10001;
+    }
 }
