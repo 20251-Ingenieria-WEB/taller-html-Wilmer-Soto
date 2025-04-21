@@ -1,5 +1,6 @@
 const searchPokemonButton = document.getElementById("searchPokemonButton");
 const deleteAllButton = document.getElementById("deleteAllButton");
+const createTeamButton = document.getElementById("createTeamButton");
 const teamPokemon = [];
 
 searchPokemonButton.addEventListener("click", () => {
@@ -28,6 +29,13 @@ deleteAllButton.addEventListener("click", () => {
     });
     teamPokemon.length = 0;
 });
+
+createTeamButton.addEventListener("click", () => {
+    const teamNameDisplay = document.getElementById("teamNameDisplay");
+    const teamName = document.getElementById("teamName").value.trim();
+
+    teamNameDisplay.innerText = teamName ? `Equipo: ${teamName}` : "Equipo: Sin nombre";
+}); 
 
 function createPokemonCard(pokemonData) {
     teamPokemon.push(pokemonData.name.toLowerCase());
