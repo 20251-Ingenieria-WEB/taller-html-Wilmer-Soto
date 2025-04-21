@@ -36,6 +36,6 @@ Esta es una aplicación web interactiva que te permite explorar el mundo de los 
 ## Tecnologías Utilizadas 💻
 
 *   HTML
-*   CSS
+*   CSS (Bootstrap)
 *   JavaScript
 *   [PokeAPI](https://pokeapi.co/)
