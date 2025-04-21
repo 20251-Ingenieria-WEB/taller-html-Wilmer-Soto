@@ -23,9 +23,26 @@
             <div class="col-md-4 offset-md-4 p-4 border rounded bg-secondary-subtle">
                 <label for="teamName" class="mb-2 fw-semibold">Ingresa un nombre para tu equipo:</label></br>
                 <input type="text" id="teamName" class="form-control "></br>
-                <button class="btn-primary btn" id="createTeamButton">Crear equipo</button>
+                <button class="btn-primary btn mb-3" id="createTeamButton">Crear equipo</button>
+
+                <label for="pokemonName" class="mb-2 fw-semibold">Ingresa un nombre de Pokemon a buscar:</label></br>
+                <input type="text" id="pokemonSearch" class="form-control"></br>
+                <button class="btn-primary btn mb-3" id="searchPokemonButton" type="submit">Buscar Pokemon por nombre</button>
+                <button class="btn-secondary btn" id="searchAleatoryButton">Pokemon Aleatorio</button>
             </div>
         </div>
+
+        <div class="row">
+            <div id="errorMessage" class="alert alert-danger d-none col-md-4 offset-md-4" role="alert">
+            </div>
+        </div>
+
+        <div class="container p-4 bg-secondary-subtle border-0 rounded">
+            <h2 class="text-center fw-semibold mb-3">Tu equipo Pokémon</h2>
+            <div id="teamDisplay" class="row g-3 justify-content-center"></div>
+        </div>
+        
     </div>
+    <script src="../js/team_builder.js"></script>
 </body>
 </html>

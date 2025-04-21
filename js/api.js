@@ -118,11 +118,10 @@ function searchPokemonTypeImages(pokeTypeUrl){
             const game = Object.values(value);
             const lastGame = game[game.length - 1];
             img.src = lastGame.name_icon;
+            img.style.width = "45px";
+            img.style.height = "22px";
             break;
         }
-
-        img.style.width = "45px";
-        img.style.height = "22px";
         pokemonTypeIconsDisplay.appendChild(img);
     })
 }
