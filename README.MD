@@ -28,6 +28,7 @@ Esta es una aplicación web interactiva que te permite explorar el mundo de los 
 2.  **Constructor de Equipos:**
     *   Dale un nombre a tu equipo en el campo correspondiente.
     *   Busca Pokémon y añádelos a tu equipo.
+    *   Tambien tienes la opcion de añadir un Pokémon aleatorio.
     *   Gestiona tu equipo eliminando Pokémon según sea necesario.
     *   O elimina todo el equipo si asi lo deseas.
     *   Crea tu equipo Pokémon personalizado!
