@@ -32,11 +32,11 @@ deleteAllButton.addEventListener("click", () => {
 function createPokemonCard(pokemonData) {
     teamPokemon.push(pokemonData.name.toLowerCase());
     const cardCol = document.createElement("div");
+    cardCol.classList.add("col-md-4");
     cardCol.id = `card-${pokemonData.name.toLowerCase()}`;
 
     // Se reutiliza el HTML de la tarjeta de Pokemon de la pagina principal. Se borra la parte de descripcion apenas. Las ids del html se definen de forma dinamica.
     const cardHTML = `
-    <div class="col-md-4">
         <div class="card h-100">
             <div class="row g-0">
                 <div class="col-md-4 d-flex align-items-center justify-content-center">
@@ -54,12 +54,13 @@ function createPokemonCard(pokemonData) {
                                 ${pokemonData.abilities.map(ability => `<span class="badge bg-info">${ability}</span>`).join('')}
                             </div>
                         </div>
-                        <button class="btn btn-danger" onclick="removePokemon('${pokemonData.name.toLowerCase()}')">Eliminar</button>
+                        <div>
+                            <button class="btn btn-danger" onclick="removePokemon('${pokemonData.name.toLowerCase()}')">Eliminar</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     `;
 
     cardCol.innerHTML = cardHTML;
