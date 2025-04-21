@@ -5,7 +5,6 @@ const searchAleatoryButton = document.getElementById("searchAleatoryButton");
 const teamPokemon = [];
 
 searchPokemonButton.addEventListener("click", () => {
-    console.log(teamPokemon)
     const pokemonSearch = document.getElementById("pokemonSearch").value.trim().toLowerCase();
     if (teamPokemon.length >= 6) {
         errorMessage.classList.remove("d-none");
@@ -44,7 +43,6 @@ searchAleatoryButton.addEventListener("click", () => {
 });
 
 function createPokemonCard(pokemonData) {
-    teamPokemon.push(pokemonData.name.toLowerCase());
     const cardCol = document.createElement("div");
     cardCol.classList.add("col-md-4");
     cardCol.id = `card-${pokemonData.name.toLowerCase()}`;
@@ -108,6 +106,7 @@ function searchPokemon(pokemonSearch){
                 abilities: data.moves.map(element => element.move.name.charAt(0).toUpperCase() + element.move.name.slice(1)),
                 types: data.types.map(element => element.type.url),
             };
+            teamPokemon.push(pokemonSearch);
             createPokemonCard(pokemonData);
             searchPokemonTypeImages(pokemonData);   
         }).catch(error =>{
@@ -147,8 +146,6 @@ function searchPokemonTypeImages(pokemonData) {
 };
 
 function removePokemon(pokemonName) {
-    console.log("Borrando Pokemon: ", pokemonName);
-
     const index = teamPokemon.findIndex(p => p.toLowerCase() === pokemonName.toLowerCase());
 
     if (index !== -1) {
