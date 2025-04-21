@@ -1,3 +1,8 @@
+## Busqueda de Pokémones y creacion de equipo usando PokeAPI 🎨
+
+<img src="./imgs/main.png">
+<img src="./imgs/team.png">
+
 ## Descripción General 🌟
 
 Esta es una aplicación web interactiva que te permite explorar el mundo de los Pokémon de dos maneras emocionantes:
