@@ -1,16 +1,28 @@
 const searchPokemonButton = document.getElementById("searchPokemonButton");
+const teamPokemon = [];
 
 searchPokemonButton.addEventListener("click", () => {
     const pokemonSearch = document.getElementById("pokemonSearch").value.trim().toLowerCase();
+    if (teamPokemon.length >= 6) {
+        errorMessage.classList.remove("d-none");
+        errorMessage.innerText = "Ya tienes un equipo completo de 6 Pokemon.";
+        return;
+    }    
+        
+    if (teamPokemon.includes(pokemonSearch)) {
+        errorMessage.classList.remove("d-none");
+        errorMessage.innerText = `Ya tienes el Pokemon ${pokemonSearch} en tu equipo.`;
+        return;
+    }
     searchPokemon(pokemonSearch);
 });
 
 function createPokemonCard(pokemonData) {
-    console.log("CREEANDO")
+    teamPokemon.push(pokemonData.name.toLowerCase());
     const cardCol = document.createElement("div");
     cardCol.classList.add("col-md-4");
 
-    // Se reutiliza el HTML de la tarjeta de Pokemon de la pagina principal. Se borra la parte de descripcion apenas. Las ids se definen de forma dinamica.
+    // Se reutiliza el HTML de la tarjeta de Pokemon de la pagina principal. Se borra la parte de descripcion apenas. Las ids del html se definen de forma dinamica.
     const cardHTML = `
         <div class="card h-100">
             <div class="row g-0">
@@ -63,7 +75,7 @@ function searchPokemon(pokemonSearch){
                 height: (data.height * 0.1).toFixed(2),
                 weight: (data.weight * 0.1).toFixed(2),
                 image: data.sprites.front_default,
-                abilities: data.moves.map(move => move.move.name.charAt(0).toUpperCase() + move.move.name.slice(1)),
+                abilities: data.moves.map(element => element.move.name.charAt(0).toUpperCase() + element.move.name.slice(1)),
                 types: data.types.map(element => element.type.url),
             };
             createPokemonCard(pokemonData);
